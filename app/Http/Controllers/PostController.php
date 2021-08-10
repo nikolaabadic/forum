@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Topic;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,13 +15,14 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Topic $topic, Request $request){
         $this->validate($request,[
             'body' => 'required'
         ]);
 
         $request -> user() -> posts() -> create([
-            'body'=> $request-> body
+            'body'=> $request-> body,
+            'topic_id' => $topic -> id
         ]);
 
         return back();
