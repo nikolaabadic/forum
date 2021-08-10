@@ -18,9 +18,7 @@ use App\Http\Controllers\TopicController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
-    return view('home');
-}) -> name('home');
+Route::get('/', [TopicController::class, 'index']) -> name('topics');
 
 Route::post('/logout', [LogoutController::class, 'store']) -> name('logout');
 

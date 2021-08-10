@@ -17,24 +17,25 @@
                  @enderror
             </div>
 
-            <div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded font-medium">Add topic</button>
+            <div class="flex flex-row-reverse">
+                <button type="submit" class="bg-green-800 text-white px-4 py-2 rounded font-medium">Add topic</button>
             </div>
         </form>
         @endauth
 
         @if($topics->count())
+            <h1 class="text-3xl mb-6">Choose a topic</h1>
             @foreach($topics as $topic)
-                <div class="mb-4">
-                    <a href="" class="font-bold">{{$topic->user->username}}</a>
+                <div class="border-b-2 border-solid border-gray-200 flex items-center mt-4 mb-4 pb-4">
+                    <a href="{{route('topics.get', $topic)}}" class="text-lg pr-4">{{$topic->title}}</a>
+                    <a href="" class="font-bold pr-1">{{$topic->user->username}}</a>
                     <span class="text-gray-600 text-sm">{{$topic->created_at->diffForHumans()}}</span>   
-                    <a href="{{route('topics.get', $topic)}}" class="mb-2">{{$topic->title}}</a>
-
+                    
                     @can('delete', $topic)
                     <form action="{{ route('topics.destroy', $topic) }}" method="post" class="mr-1">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-blue-500">Delete</button>
+                        <button type="submit" class="bg-green-800 text-white px-3 py-1 rounded font-medium ml-3">Delete</button>
                     </form>
                     @endcan
                 </div>
