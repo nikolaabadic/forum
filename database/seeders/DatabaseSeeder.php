@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\Topic::factory()->times(10)->create(['user_id' => 2]);
+        \App\Models\Topic::factory()->times(10)->create(['user_id' => 4]);
+        \App\Models\Post::factory()->times(2)->create(['user_id' => 2, 'topic_id' => 4]);
+        \App\Models\Post::factory()->times(2)->create(['user_id' => 4, 'topic_id' => 4]);
+        \App\Models\Post::factory()->times(2)->create(['user_id' => 2, 'topic_id' => 5]);
+        \App\Models\Post::factory()->times(2)->create(['user_id' => 4, 'topic_id' => 5]);
     }
 }
